@@ -5,17 +5,15 @@ import {
   Timestamp,
   arrayUnion,
   serverTimestamp,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import { ChatContext } from "../Context/ChatContext";
 import { AuthContext } from "../Context/AuthContext";
 import { doc } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { updateProfile } from "firebase/auth";
+// import { updateProfile } from "firebase/auth";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -23,8 +21,6 @@ const Input = () => {
   const [err, setErr] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-
-  const navigate = useNavigate();
 
   const handleSend = async () => {
     if (img) {

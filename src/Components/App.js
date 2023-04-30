@@ -20,6 +20,14 @@ function App() {
     return children;
   };
 
+  const LoginProtectedRoute = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -27,12 +35,26 @@ function App() {
           index
           element={
             <ProtectedRoute>
-              <Home />{" "}
+              <Home />
             </ProtectedRoute>
           }
         />
-        <Route path="login" element={<SignIn />} />
-        <Route path="register" element={<Register />} />
+        <Route
+          path="login"
+          element={
+            <LoginProtectedRoute>
+              <SignIn />
+            </LoginProtectedRoute>
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <LoginProtectedRoute>
+              <Register />
+            </LoginProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -43,10 +43,9 @@ const Search = () => {
     e.code === "Enter" && handleSearch();
   };
 
-  const handleSelect = async () => {
-    const handleSelect = (u) => {
-      dispatch({ type: "CHANGE_USER", payload: u });
-    };
+  const handleSelect = async (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+    console.log(u);
 
     // check whether the chat exists, if not create new chat in firestore
     const combineId =
@@ -111,7 +110,7 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat" onClick={handleSelect(user)}>
+        <div className="userChat" onClick={() => handleSelect(user)}>
           <img src={user.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{user.displayName}</span>
